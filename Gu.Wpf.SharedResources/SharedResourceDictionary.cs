@@ -1,12 +1,10 @@
-﻿using System.Text;
-using System.Windows.Controls;
-
-namespace Gu.Wpf.SharedResources
+﻿namespace Gu.Wpf.SharedResources
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows;
+    using System.Windows.Controls;
 
     /// <summary>
     /// http://www.wpftutorial.net/MergedDictionaryPerformance.html

@@ -4,8 +4,11 @@
         xmlns:c="clr-namespace:Controls;assembly=Controls"
         Title="MainWindow"
         Width="525"
-        Height="350"
-        SharedResourceDictionary.SharedResources="/ResourceBox;component/AllResources.xaml">
+        Height="350">
+        <!--SharedResourceDictionary.SharedResources="/ResourceBox;component/AllResources.xaml">-->
+    <!--<Window.Resources>
+        <ResourceDictionary Source="/ResourceBox;component/AllResources.xaml" />
+    </Window.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
