@@ -1,4 +1,7 @@
-﻿namespace Gu.Wpf.SharedResources
+﻿using System.Text;
+using System.Windows.Controls;
+
+namespace Gu.Wpf.SharedResources
 {
     using System;
     using System.Collections.Generic;
@@ -14,6 +17,15 @@
     /// </summary>
     public class SharedResourceDictionary : ResourceDictionary
     {
+        public static readonly DependencyProperty SharedResourcesProperty = DependencyProperty.RegisterAttached(
+            "SharedResources",
+            typeof(ResourceUri),
+            typeof(SharedResourceDictionary),
+            new FrameworkPropertyMetadata(
+                null,
+                FrameworkPropertyMetadataOptions.NotDataBindable,
+                OnSharedResourcesChanged));
+
         /// <summary>
         /// Internal cache of loaded dictionaries 
         /// </summary>
@@ -60,6 +72,66 @@
                     // If the dictionary is already loaded, get it from the cache
                     MergedDictionaries.Add(SharedDictionaries[value]);
                 }
+            }
+        }
+
+        public static void SetSharedResources(ContentControl element, ResourceUri value)
+        {
+            element.SetValue(SharedResourcesProperty, value);
+        }
+
+        [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
+        [AttachedPropertyBrowsableForType(typeof(ContentControl))]
+        public static ResourceUri GetSharedResources(ContentControl element)
+        {
+            return (ResourceUri)element.GetValue(SharedResourcesProperty);
+        }
+
+        private static void OnSharedResourcesChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null)
+            {
+                //return;
+                var message = string.Format("Cannot use null as uri. Expecting: {0}/ResourceBox;component/AllResources.xaml", Environment.NewLine);
+                throw new ArgumentNullException("e", message);
+            }
+            var resourceUri = (ResourceUri)e.NewValue;
+            //if (IsInDesignMode)
+            //{
+            //    var message = string.Format("Uri: {0}", resourceUri.Uri);
+            //    throw new ArgumentException(message);
+            //}
+            ResourceDictionary rd;
+            if (!SharedDictionaries.TryGetValue(resourceUri.Uri, out rd))
+            {
+                try
+                {
+                    rd = (ResourceDictionary)Application.LoadComponent(resourceUri.Uri);
+                }
+                catch (Exception ex)
+                {
+                    var message = string.Format("Failed loading {0}", resourceUri);
+                    throw new ArgumentException(message, ex);
+                }
+                SharedDictionaries.Add(resourceUri.Uri, rd);
+            }
+            Add(o, rd);
+        }
+
+        private static void Add(DependencyObject o, ResourceDictionary rd)
+        {
+            var fe = o as FrameworkElement;
+            if (fe != null)
+            {
+                fe.Resources.MergedDictionaries.Add(rd);
+                return;
+            }
+
+            var fce = o as FrameworkContentElement;
+            if (fce != null)
+            {
+                fce.Resources.MergedDictionaries.Add(rd);
+                return;
             }
         }
     }

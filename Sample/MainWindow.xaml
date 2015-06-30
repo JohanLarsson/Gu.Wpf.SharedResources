@@ -5,22 +5,7 @@
         Title="MainWindow"
         Width="525"
         Height="350"
-        >
-    <Window.Resources>
-        <!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ResourceBox;component/AllResources.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>-->
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ResourceBox;component/AllResources.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-        <!--<ResourceDictionary Source="/ResourceBox;component/AllResources.xaml" />-->
-    </Window.Resources>
+        SharedResourceDictionary.SharedResources="/ResourceBox;component/AllResources.xaml">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -28,17 +13,9 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Rectangle Grid.Row="0"
-                   Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
-                   />
-        <Rectangle Grid.Row="1"
-                   Fill="{StaticResource BlueBrush}"
-                   />
-        <Rectangle Grid.Row="2"
-                   Fill="{StaticResource {x:Static c:Keys.RedBrushKey}}"
-                   />
-        <Rectangle Grid.Row="3"
-                   Fill="{StaticResource {x:Static c:Keys.GreenBrushKey}}"
-                   />
+        <Rectangle Grid.Row="0" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Rectangle Grid.Row="1" Fill="{StaticResource BlueBrush}" />
+        <Rectangle Grid.Row="2" Fill="{StaticResource {x:Static c:Keys.RedBrushKey}}" />
+        <Rectangle Grid.Row="3" Fill="{StaticResource {x:Static c:Keys.GreenBrushKey}}" />
     </Grid>
 </Window>
