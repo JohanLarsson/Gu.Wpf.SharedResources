@@ -8,7 +8,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace Microsoft.Shell
+namespace Gu.Wpf.SharedResources
 {
     using System;
     using System.Collections;

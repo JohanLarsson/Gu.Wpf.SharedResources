@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Windows;
 
-    using Microsoft.Shell;
+    using Gu.Wpf.SharedResources;
 
     /// <summary>
     /// Interaction logic for App.xaml

@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Shell
+﻿namespace Gu.Wpf.SharedResources
 {
     internal enum WM
     {

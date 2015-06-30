@@ -7,6 +7,7 @@
 
     /// <summary>
     /// http://www.wpftutorial.net/MergedDictionaryPerformance.html
+    /// http://ithoughthecamewithyou.com/post/Merging-Resource-Dictionaries-for-fun-and-profit.aspx
     /// The shared resource dictionary is a specialized resource dictionary
     /// that loads it content only once. If a second instance with the same source
     /// is created, it only merges the resources from the cache.
