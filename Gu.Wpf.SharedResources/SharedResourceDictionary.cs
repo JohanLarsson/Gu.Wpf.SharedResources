@@ -105,6 +105,7 @@
             //    var assemblies = AppDomain.CurrentDomain.GetAssemblies()
             //                              .Where(a => Attribute.IsDefined(a, typeof(ThemeInfoAttribute)))
             //                              .ToArray();
+            //    System.IO.File.Delete(@"C:\Temp\Assemblies.txt");
             //    // System.IO.File.WriteAllText(@"C:\Temp\Assemblies.txt",string.Join(Environment.NewLine,assemblies.Select(x=>x.GetName().Name)));
             //    foreach (var assembly in assemblies)
             //    {
@@ -114,8 +115,12 @@
             //            try
             //            {
             //                var uri = ResourceUri.CreateForGeneric(assembly);
-            //                rd = GetOrCreate(uri);
-            //                Add(o, rd);
+            //                if (!SharedDictionaries.ContainsKey(uri))
+            //                {
+            //                    rd = GetOrCreate(uri);
+            //                    Add(o, rd);
+            //                    System.IO.File.AppendAllLines(@"C:\Temp\Assemblies.txt", new[] { string.Format("Added: {0}", uri) });
+            //                }
             //            }
             //            catch (Exception)
             //            {

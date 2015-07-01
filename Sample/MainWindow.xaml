@@ -50,5 +50,6 @@
         <Rectangle Grid.Row="5"
                    Fill="{StaticResource {x:Static c:Keys.GreenBrushKey}}"
                    />
+        <!--Can't figure out how to get rid of the warning ^^--> 
     </Grid>
 </Window>
