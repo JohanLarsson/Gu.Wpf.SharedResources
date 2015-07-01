@@ -13,29 +13,41 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.SharedResources.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{AC0B456E-45AD-4773-B9CD-D42E28E9EA79}"
 	ProjectSection(SolutionItems) = preProject
+		Gu.Wpf.SharedResources\Gu.Wpf.SharedResources.nuspec = Gu.Wpf.SharedResources\Gu.Wpf.SharedResources.nuspec
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\nuspec.2010.7.xsd = .nuget\nuspec.2010.7.xsd
+		.nuget\nuspec.2011.8.xsd = .nuget\nuspec.2011.8.xsd
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CreateNugetPackage|Any CPU = CreateNugetPackage|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1522B8F2-8045-4275-A486-5F9BA55EFFD3}.CreateNugetPackage|Any CPU.ActiveCfg = Release|Any CPU
+		{1522B8F2-8045-4275-A486-5F9BA55EFFD3}.CreateNugetPackage|Any CPU.Build.0 = Release|Any CPU
 		{1522B8F2-8045-4275-A486-5F9BA55EFFD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1522B8F2-8045-4275-A486-5F9BA55EFFD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1522B8F2-8045-4275-A486-5F9BA55EFFD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1522B8F2-8045-4275-A486-5F9BA55EFFD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48EB866A-BE25-43C2-9D78-D99076468044}.CreateNugetPackage|Any CPU.ActiveCfg = CreateNugetPackage|Any CPU
+		{48EB866A-BE25-43C2-9D78-D99076468044}.CreateNugetPackage|Any CPU.Build.0 = CreateNugetPackage|Any CPU
 		{48EB866A-BE25-43C2-9D78-D99076468044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{48EB866A-BE25-43C2-9D78-D99076468044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48EB866A-BE25-43C2-9D78-D99076468044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48EB866A-BE25-43C2-9D78-D99076468044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2399FCA5-9CA5-4C70-97A8-22B5AF80EDBC}.CreateNugetPackage|Any CPU.ActiveCfg = Release|Any CPU
+		{2399FCA5-9CA5-4C70-97A8-22B5AF80EDBC}.CreateNugetPackage|Any CPU.Build.0 = Release|Any CPU
 		{2399FCA5-9CA5-4C70-97A8-22B5AF80EDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2399FCA5-9CA5-4C70-97A8-22B5AF80EDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2399FCA5-9CA5-4C70-97A8-22B5AF80EDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2399FCA5-9CA5-4C70-97A8-22B5AF80EDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6963B258-70CF-49E3-9E33-DF09BD5571BC}.CreateNugetPackage|Any CPU.ActiveCfg = Release|Any CPU
+		{6963B258-70CF-49E3-9E33-DF09BD5571BC}.CreateNugetPackage|Any CPU.Build.0 = Release|Any CPU
 		{6963B258-70CF-49E3-9E33-DF09BD5571BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6963B258-70CF-49E3-9E33-DF09BD5571BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6963B258-70CF-49E3-9E33-DF09BD5571BC}.Release|Any CPU.ActiveCfg = Release|Any CPU

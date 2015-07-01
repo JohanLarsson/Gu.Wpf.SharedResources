@@ -45,6 +45,14 @@ namespace Gu.Wpf.SharedResources
             return uri;
         }
 
+        public static ResourceUri CreateForGeneric(Assembly assembly)
+        {
+            // "/Controls;component/Themes/Generic.xaml"
+            var uriString = string.Format(@"/{0};component/Themes/Generic.xaml", assembly.GetName().Name);
+            var uri = new Uri(uriString, UriKind.Relative);
+            return Create(uri);
+        }
+
         public static bool operator ==(ResourceUri left, ResourceUri right)
         {
             return Equals(left, right);

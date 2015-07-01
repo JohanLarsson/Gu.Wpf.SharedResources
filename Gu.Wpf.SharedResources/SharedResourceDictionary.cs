@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Reflection;
     using System.Text;
     using System.Windows;
@@ -18,6 +19,7 @@
     public class SharedResourceDictionary : ResourceDictionary
     {
         internal static readonly DependencyObject Dummy = new DependencyObject();
+
         public static readonly DependencyProperty SharedResourcesProperty = DependencyProperty.RegisterAttached(
             "SharedResources",
             typeof(ResourceUri),
@@ -25,7 +27,8 @@
             new FrameworkPropertyMetadata(
                 null,
                 FrameworkPropertyMetadataOptions.NotDataBindable,
-                OnSharedResourcesChanged));
+                OnSharedResourcesChanged,
+                OnSharedResourcesCoerce));
 
         /// <summary>
         /// Internal cache of loaded dictionaries 
@@ -95,6 +98,35 @@
                 return;
             }
             var resourceUri = (ResourceUri)e.NewValue;
+            var rd = GetOrCreate(resourceUri);
+            Add(o, rd);
+            //if (IsInDesignMode)
+            //{
+            //    var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+            //                              .Where(a => Attribute.IsDefined(a, typeof(ThemeInfoAttribute)))
+            //                              .ToArray();
+            //    // System.IO.File.WriteAllText(@"C:\Temp\Assemblies.txt",string.Join(Environment.NewLine,assemblies.Select(x=>x.GetName().Name)));
+            //    foreach (var assembly in assemblies)
+            //    {
+            //        var attribute = assembly.GetCustomAttribute<ThemeInfoAttribute>();
+            //        if (attribute.GenericDictionaryLocation == ResourceDictionaryLocation.SourceAssembly)
+            //        {
+            //            try
+            //            {
+            //                var uri = ResourceUri.CreateForGeneric(assembly);
+            //                rd = GetOrCreate(uri);
+            //                Add(o, rd);
+            //            }
+            //            catch (Exception)
+            //            {
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
+        private static ResourceDictionary GetOrCreate(ResourceUri resourceUri)
+        {
             ResourceDictionary rd;
             if (!SharedDictionaries.TryGetValue(resourceUri, out rd))
             {
@@ -109,7 +141,23 @@
                 }
                 SharedDictionaries.Add(resourceUri, rd);
             }
-            Add(o, rd);
+            return rd;
+        }
+
+        private static object OnSharedResourcesCoerce(DependencyObject d, object basevalue)
+        {
+            if (basevalue == null)
+            {
+                return null;
+            }
+            var resourceUri = basevalue as ResourceUri;
+            if (resourceUri != null)
+            {
+                return resourceUri;
+            }
+            var uri = (Uri)basevalue;
+            resourceUri = ResourceUri.Create(uri);
+            return resourceUri;
         }
 
         private static void Add(DependencyObject o, ResourceDictionary rd)

@@ -10,9 +10,9 @@
         SharedResourceDictionary.SharedResources="/ResourceBox;component/AllResources.xaml"
         mc:Ignorable="d"
         >
-    <!--SharedResourceDictionary.SharedResources="AllResources.xaml"-->
-    <!--SharedResourceDictionary.SharedResources="/ResourceBox;component/AllResources.xaml"-->
-    <!--SharedResourceDictionary.SharedResources="pack://application:,,,/ResourceBox;component/AllResources.xaml"-->
+    <!--  SharedResourceDictionary.SharedResources="AllResources.xaml"  -->
+    <!--  SharedResourceDictionary.SharedResources="/ResourceBox;component/AllResources.xaml"  -->
+    <!--  SharedResourceDictionary.SharedResources="pack://application:,,,/ResourceBox;component/AllResources.xaml"  -->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
