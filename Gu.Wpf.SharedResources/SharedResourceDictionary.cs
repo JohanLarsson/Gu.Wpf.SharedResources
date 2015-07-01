@@ -89,16 +89,10 @@
         {
             if (e.NewValue == null)
             {
-                //return;
-                var message = string.Format("Cannot use null as uri. Expecting: {0}/ResourceBox;component/AllResources.xaml", Environment.NewLine);
-                throw new ArgumentNullException("e", message);
+                return;
             }
             var resourceUri = (ResourceUri)e.NewValue;
-            //if (IsInDesignMode)
-            //{
-            //    var message = string.Format("Uri: {0}", resourceUri.Uri);
-            //    throw new ArgumentException(message);
-            //}
+
             ResourceDictionary rd;
             if (!SharedDictionaries.TryGetValue(resourceUri.Uri, out rd))
             {

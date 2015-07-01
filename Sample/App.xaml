@@ -4,6 +4,7 @@
              StartupUri="MainWindow.xaml"
              >
     <Application.Resources>
-        <ResourceDictionary Source="/ResourceBox;component/AllResources.xaml" />
+        <!--<ResourceDictionary Source="/ResourceBox;component/AllResources.xaml" />-->
+        <SolidColorBrush x:Key="BlueBrush">Blue</SolidColorBrush>
     </Application.Resources>
 </Application>

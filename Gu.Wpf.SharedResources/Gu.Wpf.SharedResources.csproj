@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResourceUri.cs" />
+    <Compile Include="ResourceUriConverter.cs" />
     <Compile Include="SingleInstance.cs" />
     <Compile Include="ISingleInstanceApp.cs" />
     <Compile Include="NativeMethods.cs" />
