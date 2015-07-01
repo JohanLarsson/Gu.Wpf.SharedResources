@@ -1,4 +1,4 @@
-﻿namespace ResourceBox
+﻿namespace Gu.Wpf.SharedResources.Tests
 {
     using System.Windows;
 
@@ -7,6 +7,5 @@
     /// </summary>
     public partial class App : Application
     {
-
     }
 }

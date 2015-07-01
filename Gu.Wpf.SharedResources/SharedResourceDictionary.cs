@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Reflection;
+    using System.Text;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -15,6 +17,7 @@
     /// </summary>
     public class SharedResourceDictionary : ResourceDictionary
     {
+        internal static readonly DependencyObject Dummy = new DependencyObject();
         public static readonly DependencyProperty SharedResourcesProperty = DependencyProperty.RegisterAttached(
             "SharedResources",
             typeof(ResourceUri),
@@ -27,14 +30,13 @@
         /// <summary>
         /// Internal cache of loaded dictionaries 
         /// </summary>
-        private static readonly Dictionary<Uri, ResourceDictionary> SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
+        private static readonly Dictionary<ResourceUri, ResourceDictionary> SharedDictionaries = new Dictionary<ResourceUri, ResourceDictionary>();
 
         public static bool IsInDesignMode
         {
             get
             {
-                return (bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))
-                                               .DefaultValue;
+                return DesignerProperties.GetIsInDesignMode(Dummy);
             }
         }
 
@@ -55,20 +57,20 @@
             set
             {
                 _sourceUri = value;
-
-                if (!SharedDictionaries.ContainsKey(value))
+                var uri = ResourceUri.Create(value);
+                if (!SharedDictionaries.ContainsKey(uri))
                 {
                     // If the dictionary is not yet loaded, load it by setting
                     // the source of the base class
                     base.Source = value;
 
                     // add it to the cache
-                    SharedDictionaries.Add(value, this);
+                    SharedDictionaries.Add(uri, this);
                 }
                 else
                 {
                     // If the dictionary is already loaded, get it from the cache
-                    MergedDictionaries.Add(SharedDictionaries[value]);
+                    MergedDictionaries.Add(SharedDictionaries[uri]);
                 }
             }
         }
@@ -79,7 +81,8 @@
         }
 
         [AttachedPropertyBrowsableForChildren(IncludeDescendants = false)]
-        [AttachedPropertyBrowsableForType(typeof(ContentControl))]
+        [AttachedPropertyBrowsableForType(typeof(UserControl))]
+        [AttachedPropertyBrowsableForType(typeof(Window))]
         public static ResourceUri GetSharedResources(ContentControl element)
         {
             return (ResourceUri)element.GetValue(SharedResourcesProperty);
@@ -92,9 +95,8 @@
                 return;
             }
             var resourceUri = (ResourceUri)e.NewValue;
-
             ResourceDictionary rd;
-            if (!SharedDictionaries.TryGetValue(resourceUri.Uri, out rd))
+            if (!SharedDictionaries.TryGetValue(resourceUri, out rd))
             {
                 try
                 {
@@ -105,7 +107,7 @@
                     var message = string.Format("Failed loading {0}", resourceUri);
                     throw new ArgumentException(message, ex);
                 }
-                SharedDictionaries.Add(resourceUri.Uri, rd);
+                SharedDictionaries.Add(resourceUri, rd);
             }
             Add(o, rd);
         }
